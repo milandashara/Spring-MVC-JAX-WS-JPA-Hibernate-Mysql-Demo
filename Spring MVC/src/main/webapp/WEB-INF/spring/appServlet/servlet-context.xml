@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/web-services
+							http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered 
+		as Spring beans. For example @Controller and @Service. Make sure to set the 
+		correct base-package -->
+	<context:component-scan
+		base-package="com.springmvc.demo" />
+
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming 
+		model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
+	<mvc:annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<mvc:interceptors>
+		<beans:bean class="com.springmvc.demo.LoginInterceptor" />
+	</mvc:interceptors>
+	<!-- Our test service bean -->
+<!-- 	<beans:bean id="LoginService"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"
+		lazy-init="true">
+		<beans:property name="schemaCollection">
+			<beans:bean
+				class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+				<beans:property name="inline" value="true" />
+				<beans:property name="xsds">
+					<beans:list>
+						<beans:value>schemas/LoginSchema.xsd</beans:value>
+					</beans:list>
+				</beans:property>
+			</beans:bean>
+		</beans:property>
+		<beans:property name="portTypeName" value="LoginService" />
+		<beans:property name="serviceName" value="LoginServices" />
+		<beans:property name="locationUri" value="/loginService" />
+	</beans:bean> -->
+
+	<!-- SAAJ-specific implementation of the WebServiceMessageFactory. Wraps 
+		a SAAJ MessageFactory. This factory will use SAAJ 1.3 when found, or fall 
+		back to SAAJ 1.2 or even 1.1. -->
+	<!-- <beans:bean id="messageFactory"
+		class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" /> -->
+
+	<!-- Requires a message factory so we declare one -->
+	<!-- <beans:bean
+		class="org.springframework.ws.transport.http.WebServiceMessageReceiverHandlerAdapter"
+		p:messageFactory-ref="messageFactory" /> -->
+
+	<!-- See reference at the beginning of this document -->
+	<!-- <beans:bean
+		class="org.springframework.ws.transport.http.WsdlDefinitionHandlerAdapter" /> -->
+
+	
+
+
+
+	<!-- See reference at the beginning of this document -->
+	<!-- <beans:bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+ -->
+
+	
+
+
+
+	
+
+
+
+
+
+</beans:beans>
